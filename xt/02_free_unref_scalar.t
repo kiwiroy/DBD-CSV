@@ -20,7 +20,7 @@ my $dbh = DBI->connect ("dbi:CSV:", undef, undef, {
     f_schema         => undef,
     f_dir            => 't',
     f_dir_search     => [],
-    f_ext            => ".csv",
+    f_ext            => ".csv/r",
     f_lock           => 2,
     f_encoding       => "utf8",
 
