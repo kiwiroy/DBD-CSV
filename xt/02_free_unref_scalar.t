@@ -25,7 +25,7 @@ sub DBD::CSV::Table::DESTROY {
     if ($dbg) {
 	Dump $csv, 1;
     } else {
-	diag sprintf '0x%x', refaddr $csv;
+	#diag sprintf '0x%x', refaddr $csv;
     }
 
 #    $self->{csv_csv_out} = $self->{meta}{csv_out} = undef;
