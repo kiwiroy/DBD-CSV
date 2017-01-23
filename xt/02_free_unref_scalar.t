@@ -89,7 +89,7 @@ my $callbacks = {
 };
 
 test_with_options(
-#    csv_tables => { tmp => { f_file => 'tmp.csv'} },
+    csv_tables => { tmp => { f_file => 'tmp.csv'} },
     %$callbacks,
 );
 
