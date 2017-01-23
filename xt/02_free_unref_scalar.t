@@ -44,10 +44,6 @@ sub test_with_options {
 
 	%opts,
 
-	csv_callbacks => {
-	    after_parse => \&new_world_monkeys,
-	},
-
 	RaiseError       => 1,
 	PrintError       => 1,
 	FetchHashKeyName => "NAME_lc",
@@ -60,8 +56,8 @@ sub test_with_options {
     my %data = (
 	tmp => {		# t/tmp.csv
 	    1 => "ape",
-	    2 => 'monkey',
-	    2 => "new world monkey",
+	    (grep(/^csv_callbacks$/, keys %opts) ? 
+	     (2 => "new world monkey") : (2 => 'monkey')),
 	    3 => "gorilla",
 	},
 	);
@@ -86,11 +82,20 @@ sub new_world_monkeys {
     return;
 }
 
+my $callbacks = {
+    csv_callbacks => {
+	after_parse => \&new_world_monkeys,
+    },
+};
 
 test_with_options(
-    csv_tables => { tmp => { f_file => 'tmp.csv'} },
+#    csv_tables => { tmp => { f_file => 'tmp.csv'} },
+    %$callbacks,
 );
 
-test_with_options(csv_auto_diag => 0) for (1 .. 100);
+test_with_options(
+    csv_auto_diag => 0,
+    %$callbacks,
+    ) for (1 .. 100);
 
 done_testing();
