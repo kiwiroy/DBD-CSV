@@ -34,6 +34,7 @@ sub DBD::CSV::Table::DESTROY {
 
 sub test_with_options {
     my (%opts) = @_;
+    my $csv_tables = delete( $opts{csv_tables} ) || {};
     my $dbh = DBI->connect ("dbi:CSV:", undef, undef, {
 	f_schema         => undef,
 	f_dir            => 't',
@@ -48,6 +49,9 @@ sub test_with_options {
 	PrintError       => 1,
 	FetchHashKeyName => "NAME_lc",
 			    }) or die "$DBI::errstr\n";
+
+
+    $dbh->{csv_tables} = $csv_tables;
 
     my %tbl = map { $_ => 1 } $dbh->tables (undef, undef, undef, undef);
 
