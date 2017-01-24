@@ -13,6 +13,6 @@ perl:
 before_install:
  - perlbrew install-cpanm -f
 env:
- - AUTOMATED_TESTING=1
+ - AUTOMATED_TESTING=2
 install:
   - cpanm --quiet DBI Text::CSV_XS SQL::Statement Pod::Parser Pod::Wordlist Pod::Escapes Text::Wrap Pod::Spell::CommonMistakes
